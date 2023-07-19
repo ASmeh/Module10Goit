@@ -6,8 +6,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Task2 {
+    private List<User> users = new ArrayList<>();
     public void execute(String path) throws IOException {
         readFile(path);
         convertToJson();
@@ -27,7 +29,7 @@ public class Task2 {
     private void convertToJson() throws IOException {
         final Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(users);
-        FileWriter fw = new FileWriter(new File("D:\\Practice\\GoIT\\module10\\src\\main\\java\\org\\example\\user.json"));
+        FileWriter fw = new FileWriter(new File(System.getProperty("user.dir")+"\\src\\main\\java\\org\\example\\user.json"));
         fw.write(json);
         fw.close();
     }
@@ -54,5 +56,5 @@ public class Task2 {
             this.age = age;
         }
     }
-    private ArrayList<User> users = new ArrayList<>();
+
 }

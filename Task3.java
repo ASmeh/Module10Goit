@@ -5,8 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.Comparator;
 
 public class Task3 {
+    private Map<String,Integer> wordsCount = new HashMap<>();
     public void execute(String path){
         parseFile(path);
         printMap();
@@ -32,12 +34,22 @@ public class Task3 {
     }
 
     private void printMap(){
-        List<Entry<String, Integer>> nlist = new ArrayList<>(wordsCount.entrySet());
-        nlist.sort(Entry.comparingByValue(Comparator.reverseOrder()));
-        for(Entry pair:nlist){
-            System.out.printf("%s %d\n",pair.getKey(),pair.getValue());
-        }
+        Comparator<String> valueComparator = new Comparator<String>() {
+            public int compare(String k1, String k2)
+            {
+                int comp = wordsCount.get(k1).compareTo(
+                        wordsCount.get(k2));
+                if (comp == 0)
+                    return 1;
+                else
+                    return comp;
+            }
 
+        };
+        TreeMap<String, Integer> sortedMap = new TreeMap<>(Collections.reverseOrder(valueComparator));
+        sortedMap.putAll(wordsCount);
+        for(Entry<String,Integer> entry:sortedMap.entrySet()){
+            System.out.printf("%s %d\n",entry.getKey(),entry.getValue());
+        }
     }
-    private Map<String,Integer> wordsCount = new HashMap<>();
 }

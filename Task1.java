@@ -4,8 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import  java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Task1 {
+    private List<String> validNumbers = new ArrayList<>();
     public void execute(String path){
         readFile(path);
         printNumbers();
@@ -33,5 +35,5 @@ public class Task1 {
         String pattern2 = "(?:\\d{3}-){2}\\d{4}";
         return line.matches(pattern1) || line.matches(pattern2);
     }
-    private ArrayList<String> validNumbers = new ArrayList<>();
+
 }
